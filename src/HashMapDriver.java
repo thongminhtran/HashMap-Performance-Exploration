@@ -12,16 +12,15 @@ public class HashMapDriver {
             System.exit(0);
         }
 
-	    try{
-	        experiment_interpret();
-        }catch(Exception e) {
-            System.out.println("Error " + e.getMessage());
-            System.exit(0);
-        }
+//	    try{
+//	        experiment_interpret();
+//        }catch(Exception e) {
+//            System.out.println("Error " + e.getMessage());
+//            System.exit(0);
+//        }
     }
 
     /**
-     * todo implement validate method (check because I already do for you)
      */
     private static void validate() throws ExecutionException, InterruptedException, TimeoutException {
         // create an array list of 50 random Key Value (key is random with construct Entry (value),
@@ -52,16 +51,16 @@ public class HashMapDriver {
     }
 
 
-    private static void experiment_interpret() {
-        // Create a hashmap of initial capacity 100
-        MyHashMap myHashMap = new MyHashMap(100);
-
-        // Create a local array list data of 150 random
-        ArrayList<Entry> data = new ArrayList<>();
-        for (int i = 0; i < 150; i++) {
-            data.add(new Entry());
-        }
-
-        // Next you do yourself, I don't understand kaka @todo here
-    }
+//    private static void experiment_interpret() {
+//        // Create a hashmap of initial capacity 100
+//        MyHashMap myHashMap = new MyHashMap(100);
+//
+//        // Create a local array list data of 150 random
+//        ArrayList<Entry> data = new ArrayList<>();
+//        for (int i = 0; i < 150; i++) {
+//            data.add(new Entry());
+//        }
+//
+//        // Next you do yourself, I don't understand kaka @todo here
+//    }
 }

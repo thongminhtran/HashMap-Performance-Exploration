@@ -1,9 +1,11 @@
+import java.util.Map;
 import java.util.Random;
 
-public class Entry extends AbstractEntry<Integer, Integer>{
+public class Entry extends AbstractEntry<Integer, Integer> {
     public Entry(Integer key, Integer value) {
         super(key, value);
     }
+    private boolean removed;
     /**
      * A constructor with key is generated randomly and value is randomly generated
      */
@@ -12,12 +14,34 @@ public class Entry extends AbstractEntry<Integer, Integer>{
         this.key = random.nextInt();
         this.value = random.nextInt();
     }
+    public boolean isRemoved(){
+        return removed;
+    }
+    public void setRemoved(boolean removed){
+        this.removed = removed;
+    }
+    public boolean equals(Object o){
+        if(!(o instanceof Entry)){
+            return false;
+        } else{
+            Entry that = (Entry) o;
+            return that.getKey().equals(key) && that.getValue().equals(value);
+        }
+    }
 
-    // todo: Implement as it is mentioned Hash functions, page 411 (Now is for example)
     @Override
     public int hashCode() {
-        int result = 17;
-        result = 31 * result + this.value.hashCode();
+        //Reference: https://www.baeldung.com/java-hashcode
+        int result = (int) (key^(key>>>32));
+        result = 31*result + value.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "key=" + key +
+                ", value=" + value +
+                '}';
     }
 }

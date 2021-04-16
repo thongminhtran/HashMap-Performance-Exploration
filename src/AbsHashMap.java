@@ -4,7 +4,7 @@ import java.util.concurrent.TimeoutException;
 
 public abstract class AbsHashMap<Key, Value> {
     // current capacity of array list (protected because I want MyHashMap can access to it)
-    protected int initialCapacity;
+    protected int initialCapacity=1;
     // current size of array list (protected because I want realSize can access to it)
     protected int realSize;
 
@@ -40,7 +40,7 @@ public abstract class AbsHashMap<Key, Value> {
      * @param value: Value v
      * @return null when doesn't have an entry with key k, or returns the old value
      */
-    abstract public AbstractEntry<Key, Value> put(Key key, Value value) throws InterruptedException, TimeoutException, ExecutionException;
+    abstract public void put(Key key, Value value) throws InterruptedException, TimeoutException, ExecutionException;
 
     /**
      * Removes from the map the entry with key equal to k, and returns its value; if the map has no entry it returns null

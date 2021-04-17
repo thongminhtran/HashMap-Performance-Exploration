@@ -40,7 +40,7 @@ public abstract class AbsHashMap<Key, Value> {
      * @param value: Value v
      * @return null when doesn't have an entry with key k, or returns the old value
      */
-    abstract public void put(Key key, Value value) throws InterruptedException, TimeoutException, ExecutionException;
+    abstract public Integer put(Key key, Value value) throws InterruptedException, TimeoutException, ExecutionException;
 
     /**
      * Removes from the map the entry with key equal to k, and returns its value; if the map has no entry it returns null

@@ -7,6 +7,7 @@ public abstract class AbstractEntry<Key, Value> {
     {
         this.key = key;
         this.value = value;
+        next = null;
     }
     public Key getKey() {
         return key;

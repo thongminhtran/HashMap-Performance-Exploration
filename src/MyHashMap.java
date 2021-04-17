@@ -28,7 +28,7 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
     private int getBucketIndex (Integer key){
         int hashCode = key.hashCode();
         int index = hashCode%capacity;
-        index = index<0?index*-1:index;
+        index = index<0?index*-1:index; //Make index > 0 to be valid
         return index;
     }
 
@@ -60,13 +60,16 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
     }
 
     @Override
-    public void put(Integer key, Integer value) throws InterruptedException, TimeoutException, ExecutionException {
+    public Integer put(Integer key, Integer value) throws InterruptedException, TimeoutException, ExecutionException {
         int bucketIndex = getBucketIndex(key);
         Entry head = buckets.get(bucketIndex);
+        // Using this loop to find if
         while(head!=null){
             if(head.key.equals(key)){
+                // If the key exists already, set it be the existing value and return the old value
+                Integer temp = head.value;   //Create temporary value to store the old value
                 head.value = value;
-                return;
+                return temp;
             }
             head = (Entry) head.next;
         }
@@ -90,6 +93,7 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
                 }
             }
         }
+        return null;
     }
 
     @Override
@@ -114,16 +118,6 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
             buckets.set(bucketIndex, (Entry) head.next);
         return head.value;
     }
-
-
-
-
-
-
-
-
-
-
 
     /**
      * todo printInformation

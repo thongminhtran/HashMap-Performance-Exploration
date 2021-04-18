@@ -1,11 +1,9 @@
-import java.util.Map;
 import java.util.Random;
 
 public class Entry extends AbstractEntry<Integer, Integer> {
     public Entry(Integer key, Integer value) {
         super(key, value);
     }
-    private boolean removed;
     /**
      * A constructor with key is generated randomly and value is randomly generated
      */
@@ -13,12 +11,6 @@ public class Entry extends AbstractEntry<Integer, Integer> {
         Random random = new Random();
         this.key = random.nextInt();
         this.value = random.nextInt();
-    }
-    public boolean isRemoved(){
-        return removed;
-    }
-    public void setRemoved(boolean removed){
-        this.removed = removed;
     }
     public boolean equals(Object o){
         if(!(o instanceof Entry)){

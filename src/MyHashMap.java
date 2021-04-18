@@ -1,16 +1,11 @@
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.concurrent.*;
 
 public class MyHashMap extends AbsHashMap<Integer, Integer> {
     // Buckets is used to store array of chains/buckets
     private ArrayList<Entry> buckets;
     private int size;
     private int capacity;
-    // 10 minutes is maximum for one function
-    private static final long maximumExecutionTime = 10;
     /**
-     * todo: Implement the logic: The class must include a constructor that accepts the initial capacity
      * for the hash table as a parameter and uses the function h(k) = k mod N as the hash (compression) function
      * Constructor to initialize capacity and create an empty chains
      *
@@ -25,10 +20,15 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
             buckets.add(null);
         }
     }
-    private int getBucketIndex (Integer key){
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    private int getIndexByKey (Integer key){
         int hashCode = key.hashCode();
-        int index = hashCode%capacity;
-        index = index<0?index*-1:index; //Make index > 0 to be valid
+        int index = hashCode % capacity;
+        index = index < 0 ? index * -1 : index; //Make index > 0 to be valid
         return index;
     }
 
@@ -39,17 +39,16 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
 
     @Override
     public boolean isEmpty() {
-        return size()==0;
+        return size == 0;
     }
 
     /**
-     * todo: implement the method, remember the time thread execution as put method below
      * @param k: key k that we want to get the entry
      * @return null if cannot find entry or value if can find the entry
      */
     @Override
     public Integer get(Integer k) {
-       int bucketIndex = getBucketIndex(k);
+       int bucketIndex = getIndexByKey(k);
        Entry head = buckets.get(bucketIndex);
        while(head!=null){
            if(head.key.equals(k))
@@ -60,9 +59,9 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
     }
 
     @Override
-    public Integer put(Integer key, Integer value) throws InterruptedException, TimeoutException, ExecutionException {
+    public Integer put(Integer key, Integer value) {
         //Reference: https://www.geeksforgeeks.org/implementing-our-own-hash-table-with-separate-chaining-in-java/
-        int bucketIndex = getBucketIndex(key);
+        int bucketIndex = getIndexByKey(key);
         Entry head = buckets.get(bucketIndex);
         // Using this loop to find if
         while(head!=null){
@@ -99,7 +98,7 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
 
     @Override
     public Integer remove(Integer key) {
-        int bucketIndex = getBucketIndex(key);
+        int bucketIndex = getIndexByKey(key);
         Entry head = buckets.get(bucketIndex);
 
         //Search for the key in its chain
@@ -118,16 +117,5 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
         else
             buckets.set(bucketIndex, (Entry) head.next);
         return head.value;
-    }
-
-    /**
-     * todo printInformation
-     * Equip the class to print: size of the table, number of elements in the table after the method has finished process(k,v) entry
-     * The number of keys that resulted in a collision
-     * The number of items in the bucket storing v
-     */
-    private void printInformation() {
-        System.out.println("Size of table is "+this.size);
-        System.out.println("");
     }
 }

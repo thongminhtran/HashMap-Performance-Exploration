@@ -5,21 +5,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 public class HashMapDriver {
-    public static int n = 100;
+    public static int n = 150;
+
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
-//        System.out.println("hello");
-//        MyHashMap myHashMap = new MyHashMap(10);
-//        myHashMap.put(234, 35654);
-//        myHashMap.put(9429, 239491);
-//        myHashMap.put(123, 3543);
-//        myHashMap.put(31, 23423);
-//        System.out.println(myHashMap.size());
-//        if (!myHashMap.isEmpty()) {
-//            System.out.println("my map is not empty");
-//        }
-//        System.out.println(myHashMap.remove(234));
-//        System.out.println(myHashMap.size());
-        validate();
+
+//        validate();
+        experiment_interpret();
     }
 
     public static void validate() throws InterruptedException, ExecutionException, TimeoutException {
@@ -58,13 +49,22 @@ public class HashMapDriver {
         }
 
     }
-    public static void experiment_interpret(){
+
+    public static void experiment_interpret() throws InterruptedException, ExecutionException, TimeoutException {
         //TODO: Measure put method running time using this function.
         MyHashMap myHashMap = new MyHashMap(100);
         ArrayList<Entry> data = new ArrayList<>(150);
-        for(int i=0;i<n;i++){
+        for (int i = 0; i < n; i++) {
             data.add(new Entry());
         }
+        double startTime = System.nanoTime();
+        for (Entry entry : data) {
+            myHashMap.put(entry.key, entry.value);
+        }
+        double endTime = System.nanoTime();
+        double timeElapsed = (endTime-startTime);
+        System.out.println("Running time of adding "+n+" elements is "+timeElapsed+" nanoseconds.");
+        System.out.println("my hashmap size is " + myHashMap.size());
 
     }
 

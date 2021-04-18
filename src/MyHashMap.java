@@ -61,6 +61,7 @@ public class MyHashMap extends AbsHashMap<Integer, Integer> {
 
     @Override
     public Integer put(Integer key, Integer value) throws InterruptedException, TimeoutException, ExecutionException {
+        //Reference: https://www.geeksforgeeks.org/implementing-our-own-hash-table-with-separate-chaining-in-java/
         int bucketIndex = getBucketIndex(key);
         Entry head = buckets.get(bucketIndex);
         // Using this loop to find if
